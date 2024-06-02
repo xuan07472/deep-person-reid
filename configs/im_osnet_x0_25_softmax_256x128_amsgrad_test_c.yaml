@@ -1,0 +1,39 @@
+model:
+  name: 'osnet_x0_25'
+  pretrained: True
+  load_weights: 'log/osnet_x0_25_market1501_softmax/model/model.pth'
+
+data:
+  type: 'image'
+  sources: ['market1501']
+  targets: ['market1501']
+  height: 128
+  width: 256
+  combineall: False
+  transforms: ['random_flip']
+  save_dir: 'log/osnet_x0_25_market1501_softmax_test'
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.003
+  max_epoch: 40
+  batch_size: 64
+  fixbase_epoch: 5
+  open_layers: ['classifier']
+  lr_scheduler: 'single_step'
+  stepsize: [20]
+
+test:
+  batch_size: 128
+  dist_metric: 'euclidean'
+  normalize_feature: False
+  evaluate: True
+  visrank: True
+  visrank_topk: 5
+  eval_freq: -1
+  rerank: False
