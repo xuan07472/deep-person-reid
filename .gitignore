@@ -139,8 +139,3 @@ log/
 saved-models/
 model-zoo/
 debug*
-
-# Custom configuration
-datasets/
-try.ipynb
-try_reid*.ipynb
